@@ -1,16 +1,21 @@
 const fs = require('fs');
 const https = require('https');
-const util = require('util')
+const util = require('util');
+const readline = require('readline');
+const { stdin: input, stdout: output } = require('process');
+const rl = readline.createInterface({ input, output });
+
 
 init();
 
 async function init() {
     console.log("scrapping Freelance-info.fr");
 
+    const key = await inputKey(); 
+
     console.log('extract link list');
     let fullRemote = [];
-    // const links = await getLinks('https://www.freelance-info.fr/missions?keywords=jee&remote=1&page=');
-    const links = await getLinks('https://www.freelance-info.fr/missions?keywords=angular&remote=1&page=');
+    const links = await getLinks(key);
 
     console.log('extract remote info');
     for (link of links) {
@@ -27,13 +32,24 @@ async function init() {
     }
 }
 
-async function getLinks(url) {
+async function inputKey() {
+    return new Promise((resolve, rej) => {
+        rl.question("Quel est le mot clef de votre recherche ?", function(url) {
+            rl.close();
+            resolve(url);
+        });
+    })
+}
+
+async function getLinks(key) {
     return new Promise(async (resolve, rej) => {
+        const urlP1 = "https://www.freelance-info.fr/missions?keywords=";
+        const urlP2 = "&remote=";
         let links = [];
         let index = 1;
         let endSearchResult = false;
         while (!endSearchResult) {
-            const page = (await getSearchPage(url + index)).toString();
+            const page = (await getSearchPage(urlP1 + key + index)).toString();
             if (page.match(/Désolé, actuellement aucune mission ne correspond à vos critères./g)) {
                 endSearchResult = true;
             } else {
