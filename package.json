@@ -1,0 +1,19 @@
+{
+  "name": "scrapping-freelance-info",
+  "version": "1.0.0",
+  "description": "This script allows freelance to fetch all the full remote mission from their search result on Freelance-info.fr",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/getinph/scrapping-freelance-info.git"
+  },
+  "author": "ttrigaut",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/getinph/scrapping-freelance-info/issues"
+  },
+  "homepage": "https://github.com/getinph/scrapping-freelance-info#readme"
+}
