@@ -33,7 +33,7 @@ async function init() {
             } else {
                 await appendFile("file.txt", 'https://www.freelance-info.fr' + link + '\n'); 
             }
-            console.log(link);
+            console.log('https://www.freelance-info.fr' + link);
         }   
     }
     console.log('nombre de résulats full remote for ' + key + ' : ' + nbFullRemote);
